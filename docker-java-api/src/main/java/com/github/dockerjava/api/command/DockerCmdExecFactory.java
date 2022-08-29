@@ -264,6 +264,8 @@ public interface DockerCmdExecFactory extends Closeable {
      */
     RemoveConfigCmd.Exec createRemoveConfigCmdExec();
 
+    GetDataUsageInfoCmd.Exec createGetDataUsageInfoCmdExec();
+
 
     @Override
     void close() throws IOException;

@@ -30,6 +30,9 @@ public class InspectVolumeResponse extends DockerObject {
     @JsonProperty("Options")
     private Map<String, String> options;
 
+    @JsonProperty("UsageData")
+    private UsageData usageData;
+
     public String getName() {
         return name;
     }
@@ -48,6 +51,29 @@ public class InspectVolumeResponse extends DockerObject {
 
     public Map<String, String> getOptions() {
         return options;
+    }
+
+    public UsageData getUsageData() {
+        return usageData;
+    }
+
+    @EqualsAndHashCode
+    @ToString
+    public static class UsageData extends DockerObject {
+
+        @JsonProperty("Size")
+        private Long size;
+
+        @JsonProperty("RefCount")
+        private Long refCount;
+
+        public Long getSize() {
+            return size;
+        }
+
+        public Long getRefCount() {
+            return refCount;
+        }
     }
 
 }

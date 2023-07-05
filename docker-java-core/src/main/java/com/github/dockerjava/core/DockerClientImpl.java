@@ -22,6 +22,7 @@ import com.github.dockerjava.api.command.DockerCmdExecFactory;
 import com.github.dockerjava.api.command.EventsCmd;
 import com.github.dockerjava.api.command.ExecCreateCmd;
 import com.github.dockerjava.api.command.ExecStartCmd;
+import com.github.dockerjava.api.command.GetDataUsageInfoCmd;
 import com.github.dockerjava.api.command.InfoCmd;
 import com.github.dockerjava.api.command.InitializeSwarmCmd;
 import com.github.dockerjava.api.command.InspectConfigCmd;
@@ -105,6 +106,7 @@ import com.github.dockerjava.core.command.DisconnectFromNetworkCmdImpl;
 import com.github.dockerjava.core.command.EventsCmdImpl;
 import com.github.dockerjava.core.command.ExecCreateCmdImpl;
 import com.github.dockerjava.core.command.ExecStartCmdImpl;
+import com.github.dockerjava.core.command.GetDataUsageInfoCmdImpl;
 import com.github.dockerjava.core.command.InfoCmdImpl;
 import com.github.dockerjava.core.command.InitializeSwarmCmdImpl;
 import com.github.dockerjava.core.command.InpectNetworkCmdImpl;
@@ -702,6 +704,11 @@ public class DockerClientImpl implements Closeable, DockerClient {
     @Override
     public RemoveConfigCmd removeConfigCmd(String configId) {
         return new RemoveConfigCmdImpl(getDockerCmdExecFactory().createRemoveConfigCmdExec(), configId);
+    }
+
+    @Override
+    public GetDataUsageInfoCmd getDataUsageInfoCmd() {
+        return new GetDataUsageInfoCmdImpl(getDockerCmdExecFactory().createGetDataUsageInfoCmdExec());
     }
 
 

@@ -21,6 +21,7 @@ import com.github.dockerjava.api.command.DockerCmdExecFactory;
 import com.github.dockerjava.api.command.EventsCmd;
 import com.github.dockerjava.api.command.ExecCreateCmd;
 import com.github.dockerjava.api.command.ExecStartCmd;
+import com.github.dockerjava.api.command.GetDataUsageInfoCmd;
 import com.github.dockerjava.api.command.InfoCmd;
 import com.github.dockerjava.api.command.InitializeSwarmCmd;
 import com.github.dockerjava.api.command.InspectConfigCmd;
@@ -99,6 +100,7 @@ import com.github.dockerjava.core.exec.DisconnectFromNetworkCmdExec;
 import com.github.dockerjava.core.exec.EventsCmdExec;
 import com.github.dockerjava.core.exec.ExecCreateCmdExec;
 import com.github.dockerjava.core.exec.ExecStartCmdExec;
+import com.github.dockerjava.core.exec.GetDataUsageInfoCmdExec;
 import com.github.dockerjava.core.exec.InspectConfigCmdExec;
 import com.github.dockerjava.core.exec.ListConfigsCmdExec;
 import com.github.dockerjava.core.exec.RemoveConfigCmdExec;
@@ -586,6 +588,11 @@ public abstract class AbstractDockerCmdExecFactory implements DockerCmdExecFacto
     @Override
     public RemoveConfigCmd.Exec createRemoveConfigCmdExec() {
         return new RemoveConfigCmdExec(getBaseResource(), getDockerClientConfig());
+    }
+
+    @Override
+    public GetDataUsageInfoCmd.Exec createGetDataUsageInfoCmdExec() {
+        return new GetDataUsageInfoCmdExec(getBaseResource(), getDockerClientConfig());
     }
 
 

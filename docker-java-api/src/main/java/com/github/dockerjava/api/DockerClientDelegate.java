@@ -20,6 +20,7 @@ import com.github.dockerjava.api.command.DisconnectFromNetworkCmd;
 import com.github.dockerjava.api.command.EventsCmd;
 import com.github.dockerjava.api.command.ExecCreateCmd;
 import com.github.dockerjava.api.command.ExecStartCmd;
+import com.github.dockerjava.api.command.GetDataUsageInfoCmd;
 import com.github.dockerjava.api.command.InfoCmd;
 import com.github.dockerjava.api.command.InitializeSwarmCmd;
 import com.github.dockerjava.api.command.InspectConfigCmd;
@@ -512,6 +513,11 @@ public class DockerClientDelegate implements DockerClient {
     @Override
     public RemoveConfigCmd removeConfigCmd(String configId) {
         return getDockerClient().removeConfigCmd(configId);
+    }
+
+    @Override
+    public GetDataUsageInfoCmd getDataUsageInfoCmd() {
+        return getDockerClient().getDataUsageInfoCmd();
     }
 
     @Override

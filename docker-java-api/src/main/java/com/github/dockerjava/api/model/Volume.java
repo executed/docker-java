@@ -55,6 +55,7 @@ public class Volume implements Serializable {
      * Handles the {@code { "Destination" : "/path/to/mount" }} variant.
      * @param path the destination path of the bind mounted volume
      */
+    @JsonCreator
     public Volume(String path) {
         this.path = path;
     }

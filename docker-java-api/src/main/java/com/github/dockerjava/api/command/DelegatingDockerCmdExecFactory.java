@@ -401,6 +401,11 @@ public class DelegatingDockerCmdExecFactory implements DockerCmdExecFactory {
     }
 
     @Override
+    public GetDataUsageInfoCmd.Exec createGetDataUsageInfoCmdExec() {
+        return getDockerCmdExecFactory().createGetDataUsageInfoCmdExec();
+    }
+
+    @Override
     public void close() throws IOException {
         getDockerCmdExecFactory().close();
     }

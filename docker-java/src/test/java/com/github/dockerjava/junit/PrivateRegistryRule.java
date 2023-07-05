@@ -22,6 +22,9 @@ import static org.hamcrest.Matchers.nullValue;
 
 public class PrivateRegistryRule extends ExternalResource {
 
+    public static final String PRIVATE_REG_IMG_NAME = "private-registry-image";
+    public static final String PRIVATE_REG_IMG_TAG = "2";
+
     private final DockerClient dockerClient;
 
     private AuthConfig authConfig;
@@ -68,8 +71,6 @@ public class PrivateRegistryRule extends ExternalResource {
 
         int port = 5050;
 
-        String imageName = "private-registry-image";
-
         File baseDir = new File(DockerRule.class.getResource("/privateRegistry").getFile());
 
         String registryImageId = dockerClient.buildImageCmd(baseDir)
@@ -81,12 +82,12 @@ public class PrivateRegistryRule extends ExternalResource {
         assertThat(inspectImageResponse, not(nullValue()));
         DockerRule.LOG.info("Image Inspect: {}", inspectImageResponse.toString());
 
-        dockerClient.tagImageCmd(registryImageId, imageName, "2")
+        dockerClient.tagImageCmd(registryImageId, PRIVATE_REG_IMG_NAME, PRIVATE_REG_IMG_TAG)
                 .withForce().exec();
 
         // see https://github.com/docker/distribution/blob/master/docs/deploying.md#native-basic-auth
         CreateContainerResponse testregistry = dockerClient
-                .createContainerCmd(imageName + ":2")
+                .createContainerCmd(PRIVATE_REG_IMG_NAME + ":" + PRIVATE_REG_IMG_TAG)
                 .withHostConfig(newHostConfig()
                         .withPortBindings(new PortBinding(Ports.Binding.bindPort(port), ExposedPort.tcp(5000))))
                 .withEnv("REGISTRY_AUTH=htpasswd", "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm",

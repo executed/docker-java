@@ -77,6 +77,7 @@ public class DefaultDockerClientConfig implements Serializable, DockerClientConf
         DEFAULT_PROPERTIES.put(DOCKER_CONFIG, "${user.home}/.docker");
         DEFAULT_PROPERTIES.put(REGISTRY_URL, "https://index.docker.io/v1/");
         DEFAULT_PROPERTIES.put(REGISTRY_USERNAME, "${user.name}");
+        DEFAULT_PROPERTIES.put("DOCKER_BUILDKIT", "1");
     }
 
     private final URI dockerHost;

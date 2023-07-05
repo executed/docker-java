@@ -20,6 +20,7 @@ import com.github.dockerjava.api.command.DisconnectFromNetworkCmd;
 import com.github.dockerjava.api.command.EventsCmd;
 import com.github.dockerjava.api.command.ExecCreateCmd;
 import com.github.dockerjava.api.command.ExecStartCmd;
+import com.github.dockerjava.api.command.GetDataUsageInfoCmd;
 import com.github.dockerjava.api.command.InfoCmd;
 import com.github.dockerjava.api.command.InitializeSwarmCmd;
 import com.github.dockerjava.api.command.InspectConfigCmd;
@@ -489,6 +490,8 @@ public interface DockerClient extends Closeable {
      * @return command
      */
     RemoveConfigCmd removeConfigCmd(String configId);
+
+    GetDataUsageInfoCmd getDataUsageInfoCmd();
 
 
     @Override

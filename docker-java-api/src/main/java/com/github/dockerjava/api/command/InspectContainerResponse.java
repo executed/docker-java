@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.dockerjava.api.model.ContainerConfig;
 import com.github.dockerjava.api.model.DockerObject;
 import com.github.dockerjava.api.model.HostConfig;
+import com.github.dockerjava.api.model.MountType;
 import com.github.dockerjava.api.model.NetworkSettings;
 import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.api.model.VolumeBind;
@@ -15,6 +16,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.annotation.CheckForNull;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -457,7 +459,14 @@ public class InspectContainerResponse extends DockerObject {
 
     @EqualsAndHashCode
     @ToString
-    public static class Mount extends DockerObject {
+    public static class Mount extends DockerObject implements Serializable {
+
+        /**
+         * @see MountType
+         * @since 1.24
+         */
+        @JsonProperty("Type")
+        private MountType type;
 
         /**
          * @since {@link RemoteApiVersion#VERSION_1_20}
@@ -501,6 +510,22 @@ public class InspectContainerResponse extends DockerObject {
         @JsonProperty("RW")
         private Boolean rw;
 
+        /**
+         * Propagation describes how mounts are propagated from the host into the mount
+         * point, and vice-versa. This field is not used on Windows.
+         * @see <a href="https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt">Linux kernel documentation</a>
+         */
+        @JsonProperty("Propagation")
+        private String propagation;
+
+        /**
+         * @see #type
+         */
+        @CheckForNull
+        public MountType getType() {
+            return this.type;
+        }
+
         @CheckForNull
         public String getName() {
             return name;
@@ -529,6 +554,14 @@ public class InspectContainerResponse extends DockerObject {
         @CheckForNull
         public Boolean getRW() {
             return rw;
+        }
+
+        /**
+         * @see #propagation
+         */
+        @CheckForNull
+        public String getPropagation() {
+            return this.propagation;
         }
 
         /**
